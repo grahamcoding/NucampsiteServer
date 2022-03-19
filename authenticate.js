@@ -5,7 +5,6 @@ const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 const FacebookTokenStrategy = require('passport-facebook-token');
 const jwt = require('jsonwebtoken'); // used to create, sign, and verify tokens
-
 const config = require('./config.js');
 
 exports.local = passport.use(new LocalStrategy(User.authenticate()));
