@@ -2,6 +2,7 @@ const express = require('express');
 const Promotion = require('../models/promotion');
 const authenticate = require('../authenticate');
 const cors = require('./cors');
+
 const promotionRouter = express.Router();
 
 promotionRouter.route('/')
@@ -15,7 +16,7 @@ promotionRouter.route('/')
     })
     .catch(err => next(err));
 })
-.post(cors.corsWithOptions, authenticate.verifyUser, authenticate.verifyAdmin, (req, res) => {
+.post(cors.corsWithOptions, authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
     Promotion.create(req.body)
     .then(promotion => {
         console.log('Promotion Created ', promotion);
@@ -25,7 +26,7 @@ promotionRouter.route('/')
     })
     .catch(err => next(err));
 })
-.put(cors.corsWithOptions, authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
+.put(cors.corsWithOptions, authenticate.verifyUser, authenticate.verifyAdmin, (req, res) => {
     res.statusCode = 403;
     res.end('PUT operation not supported on /promotions');
 })
@@ -50,7 +51,7 @@ promotionRouter.route('/:promotionId')
     })
     .catch(err => next(err));
 })
-.post(cors.corsWithOptions, authenticate.verifyUser, authenticate.verifyAdmin, (req, res) => {
+.post(cors.corsWithOptions, authenticate.verifyUser, (req, res) => {
     res.statusCode = 403;
     res.end(`POST operation not supported on /promotions/${req.params.promotionId}`);
 })

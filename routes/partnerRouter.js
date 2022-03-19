@@ -51,7 +51,7 @@ partnerRouter.route('/:partnerId')
     })
     .catch(err => next(err));
 })
-.post(cors.corsWithOptions, authenticate.verifyUser, authenticate.verifyAdmin, (req, res) => {
+.post(cors.corsWithOptions, authenticate.verifyUser, (req, res) => {
     res.statusCode = 403;
     res.end(`POST operation not supported on /partners/${req.params.partnerId}`);
 })

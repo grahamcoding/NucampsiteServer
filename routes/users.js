@@ -3,16 +3,17 @@ const User = require('../models/user');
 const passport = require('passport');
 const authenticate = require('../authenticate');
 const cors = require('./cors');
+
 const router = express.Router();
 
-/* GET users listing. */
-router.get('/', cors.corsWithOptions, authenticate.verifyUser, authenticate.verifyAdmin, function(req, res, next) {
+router.get('/', cors.corsWithOptions, authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
     User.find()
     .then(users => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
         res.json(users);
     })
+    .catch(err => next(err));
 });
 
 router.post('/signup', cors.corsWithOptions, (req, res) => {
