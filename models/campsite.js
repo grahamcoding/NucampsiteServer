@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+
 require('mongoose-currency').loadType(mongoose);
 const Currency = mongoose.Types.Currency;
 
@@ -53,6 +54,7 @@ const campsiteSchema = new Schema({
 }, {
     timestamps: true
 });
+
 const Campsite = mongoose.model('Campsite', campsiteSchema);
 
 module.exports = Campsite;
